@@ -6,79 +6,78 @@
 <title>Penilaian Akhir Bab 4 – PAI Kelas 3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Pixelify+Sans:wght@500;700&family=VT323&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Syne:wght@700;800&family=Work+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --desk:#008080; --win:#c0c0c0; --paper:#fffdf2; --ink:#16161d; --navy:#000080; --navy2:#1084d0;
-  --ok:#0a7d2c; --bad:#c1121f; --sun:#ffd23f; --hi:#fff; --lo:#808080;
-  --bevel-out: inset -2px -2px 0 var(--lo), inset 2px 2px 0 var(--hi), 4px 4px 0 var(--ink);
-  --bevel-in: inset 2px 2px 0 var(--lo), inset -2px -2px 0 var(--hi);
-}
+:root{--bg:#fbfaf7;--ink:#111;--red:#e4312b;--blue:#1b3fd1;--yel:#ffc800;--grn:#0c8a4b;--pink:#f7b2c4;--line:3px solid var(--ink)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;min-height:100vh;background:var(--desk);
-  background-image:linear-gradient(rgba(0,0,0,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.08) 1px,transparent 1px);
-  background-size:24px 24px;color:var(--ink);font-family:'VT323',ui-monospace,monospace;font-size:clamp(1.25rem,1.1rem + .6vw,1.6rem);line-height:1.25}
-.wrap{width:min(920px,100% - 1.5rem);margin:0 auto;padding:1rem 0 5rem}
-.win{background:var(--win);box-shadow:var(--bevel-out);border:2px solid var(--ink);margin-bottom:1.4rem}
-.bar{display:flex;align-items:center;gap:.6rem;background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;
-  font-family:'Pixelify Sans',sans-serif;font-weight:700;padding:.3rem .6rem;font-size:clamp(1rem,.9rem + .5vw,1.3rem)}
-.bar span.ttl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar i{font-style:normal;background:var(--win);color:var(--ink);width:1.5rem;height:1.5rem;display:grid;place-items:center;box-shadow:var(--bevel-out);font-size:.9rem}
-.body{padding:clamp(.8rem,2.5vw,1.5rem)}
-h1{font-family:'Pixelify Sans',sans-serif;font-size:clamp(1.8rem,1.2rem + 3vw,3.2rem);line-height:1;margin:.2rem 0 .6rem;
-  text-shadow:3px 3px 0 var(--sun)}
-.btn{font:inherit;font-family:'Pixelify Sans',sans-serif;font-weight:700;background:var(--win);border:2px solid var(--ink);padding:.55rem 1.1rem;cursor:pointer;
-  box-shadow:var(--bevel-out);color:var(--ink);transition:transform .08s,box-shadow .08s}
-.btn:hover:not(:disabled){background:#d8d8d8}
-.btn:active:not(:disabled){transform:translate(3px,3px);box-shadow:var(--bevel-in)}
-.btn:disabled{color:var(--lo);cursor:not-allowed;text-shadow:1px 1px 0 var(--hi)}
-.btn.go{background:var(--sun)}
-:focus-visible{outline:3px dashed var(--bad);outline-offset:2px}
-input[type=text],textarea{width:100%;font:inherit;background:var(--paper);border:2px solid var(--ink);box-shadow:var(--bevel-in);padding:.5rem .7rem;color:var(--ink)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:'Work Sans',system-ui,sans-serif;font-size:clamp(1rem,.95rem + .35vw,1.18rem);line-height:1.5;overflow-x:hidden}
+/* komposisi geometris di latar */
+body::before,body::after{content:"";position:fixed;z-index:-1;pointer-events:none}
+body::before{width:min(46vw,420px);aspect-ratio:1;border-radius:50%;background:var(--yel);right:-12vw;top:-8vw;box-shadow:-22vw 62vh 0 -4vw var(--pink)}
+body::after{width:0;height:0;border-left:min(14vw,120px) solid transparent;border-right:min(14vw,120px) solid transparent;border-bottom:min(24vw,200px) solid var(--blue);left:-4vw;bottom:6vh;transform:rotate(18deg)}
+.wrap{width:min(900px,100% - 1.5rem);margin:0 auto;padding:1.2rem 0 5rem}
+.win{background:#fff;border:var(--line);box-shadow:10px 10px 0 var(--ink);margin-bottom:1.6rem;position:relative}
+.bar{display:flex;align-items:center;gap:.6rem;border-bottom:var(--line);padding:.35rem .9rem;font-family:'Syne',sans-serif;font-weight:700;background:linear-gradient(90deg,var(--red) 0 .8rem,var(--yel) .8rem 1.6rem,var(--blue) 1.6rem 2.4rem,#fff 2.4rem);padding-left:3.2rem;font-size:.95rem}
+.bar i,.marq{display:none}
+.bar .ttl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.body{padding:clamp(1rem,3vw,1.8rem)}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.1rem,1.2rem + 4.5vw,4.4rem);line-height:.95;margin:.2rem 0 1rem;letter-spacing:-.03em;position:relative;display:inline-block;isolation:isolate}
+h1::after{content:"";position:absolute;right:-.55em;top:-.25em;width:.8em;height:.8em;border-radius:50%;background:var(--red);mix-blend-mode:multiply;z-index:-1}
+.btn{font:inherit;font-family:'Syne',sans-serif;font-weight:700;background:#fff;border:var(--line);padding:.65rem 1.3rem;cursor:pointer;color:var(--ink);box-shadow:5px 5px 0 var(--ink);transition:transform .12s,box-shadow .12s,background .12s;border-radius:999px}
+.btn:hover:not(:disabled){background:var(--yel);transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--ink)}
+.btn:active:not(:disabled){transform:translate(4px,4px);box-shadow:0 0 0 var(--ink)}
+.btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.btn.go{background:var(--blue);color:#fff}
+.btn.go:hover:not(:disabled){background:var(--red)}
+:focus-visible{outline:4px solid var(--blue);outline-offset:3px}
+input[type=text],textarea{width:100%;font:inherit;background:#fff;border:var(--line);padding:.7rem .9rem;color:var(--ink);border-radius:0;transition:box-shadow .15s}
+input[type=text]:focus,textarea:focus{outline:none;box-shadow:6px 6px 0 var(--yel)}
 textarea{min-height:7rem;resize:vertical}
 /* timer */
-#hud{position:sticky;top:.5rem;z-index:20}
-#hud .body{display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:center;padding:.6rem .9rem}
-#clock{font-family:'Pixelify Sans',sans-serif;font-weight:700;font-size:clamp(1.6rem,1.2rem + 2vw,2.4rem);background:#0b1a0b;color:#39ff6a;padding:.1rem .8rem;box-shadow:var(--bevel-in);letter-spacing:.08em;text-shadow:0 0 8px #39ff6a99}
-#clock.low{color:#ff4d4d;text-shadow:0 0 8px #ff4d4d99;animation:blink 1s steps(2) infinite}
-@keyframes blink{50%{opacity:.45}}
-.prog{flex:1 1 180px;min-width:150px}
-.track{height:1.3rem;background:var(--paper);box-shadow:var(--bevel-in);padding:2px}
-#fill{height:100%;width:0;background:repeating-linear-gradient(90deg,var(--navy) 0 10px,transparent 10px 13px);transition:width .35s}
+#hud{position:sticky;top:.6rem;z-index:20}
+#hud .body{display:flex;flex-wrap:wrap;gap:.7rem 1.3rem;align-items:center;padding:.7rem 1rem}
+#clock{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.7rem,1.2rem + 2.4vw,2.8rem);background:var(--ink);color:var(--yel);padding:.05rem .9rem;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+#clock.low{background:var(--red);color:#fff;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.6}}
+.prog{flex:1 1 180px;min-width:150px;font-weight:600}
+.track{height:.9rem;border:var(--line);background:#fff;margin-top:.2rem}
+#fill{height:100%;width:0;background:linear-gradient(90deg,var(--red) 0 33%,var(--yel) 33% 66%,var(--blue) 66%);background-size:300px 100%;transition:width .4s cubic-bezier(.3,1.4,.5,1)}
 /* soal */
-.q{background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:1rem;margin-bottom:1.1rem;transition:background .2s}
-.q.done{background:#f2ffe8}
-.qh{display:flex;gap:.7rem;align-items:flex-start}
-.no{flex:none;font-family:'Pixelify Sans',sans-serif;font-weight:700;background:var(--ink);color:var(--sun);min-width:2.4rem;height:2.4rem;display:grid;place-items:center;transform:rotate(-4deg)}
-.qt{margin:0;font-size:1.15em}
-.ar{font-family:'Amiri',serif;font-size:clamp(2rem,1.5rem + 2.5vw,3rem);direction:rtl;text-align:center;background:#fff;border:2px dashed var(--ink);margin:.7rem 0;padding:.3rem;line-height:1.7}
-.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:.55rem;margin-top:.8rem}
-.opt{display:flex;gap:.6rem;align-items:center;text-align:left;font:inherit;background:var(--win);border:2px solid var(--ink);padding:.45rem .6rem;cursor:pointer;
-  box-shadow:var(--bevel-out);transition:transform .08s}
-.opt:hover{transform:translate(-1px,-1px);background:#dcdcdc}
-.opt b{flex:none;font-family:'Pixelify Sans',sans-serif;width:1.8rem;height:1.8rem;display:grid;place-items:center;background:var(--paper);border:2px solid var(--ink)}
-.opt[aria-checked=true]{background:var(--navy);color:#fff;box-shadow:var(--bevel-in);transform:translate(2px,2px)}
-.opt[aria-checked=true] b{background:var(--sun);color:var(--ink)}
-.sec{font-family:'Pixelify Sans',sans-serif;background:var(--ink);color:var(--paper);padding:.4rem .8rem;margin:1.8rem 0 .9rem;font-size:1.1em}
-.q input,.q textarea{margin-top:.7rem}
+.q{background:#fff;border:var(--line);padding:1.1rem;margin-bottom:1.3rem;position:relative;transition:box-shadow .25s,transform .25s;box-shadow:0 0 0 var(--ink)}
+.q:nth-of-type(3n+1).done{box-shadow:8px 8px 0 var(--red)}
+.q:nth-of-type(3n+2).done{box-shadow:8px 8px 0 var(--yel)}
+.q:nth-of-type(3n).done{box-shadow:8px 8px 0 var(--blue)}
+.q.done{transform:translate(-3px,-3px)}
+.qh{display:flex;gap:.9rem;align-items:flex-start}
+.no{flex:none;font-family:'Syne',sans-serif;font-weight:800;min-width:2.8rem;height:2.8rem;display:grid;place-items:center;color:#fff;background:var(--red);border-radius:50%;border:var(--line)}
+.q:nth-of-type(3n+2) .no{background:var(--yel);color:var(--ink);border-radius:0}
+.q:nth-of-type(3n) .no{background:var(--blue);border-radius:0 50% 0 50%}
+.qt{margin:.2rem 0 0;font-size:1.08em;font-weight:500}
+.ar{font-family:'Amiri',serif;font-size:clamp(2rem,1.5rem + 2.5vw,3.1rem);direction:rtl;text-align:center;background:var(--pink);border:var(--line);margin:.9rem 0;padding:.2rem .5rem;line-height:1.8}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:.65rem;margin-top:.9rem}
+.opt{display:flex;gap:.7rem;align-items:center;text-align:left;font:inherit;background:#fff;border:var(--line);padding:.55rem .75rem;cursor:pointer;transition:transform .12s,background .12s,box-shadow .12s}
+.opt:hover{background:var(--yel);transform:translateY(-2px)}
+.opt b{flex:none;font-family:'Syne',sans-serif;width:1.9rem;height:1.9rem;display:grid;place-items:center;border:var(--line);border-radius:50%;background:#fff;transition:background .12s}
+.opt[aria-checked=true]{background:var(--blue);color:#fff;box-shadow:5px 5px 0 var(--ink);transform:translate(-2px,-2px)}
+.opt[aria-checked=true] b{background:var(--yel);color:var(--ink)}
+.sec{font-family:'Syne',sans-serif;font-weight:700;background:var(--ink);color:#fff;padding:.6rem 1rem .6rem 3.2rem;margin:2rem 0 1.1rem;position:relative}
+.sec::before{content:"";position:absolute;left:.8rem;top:50%;width:1.5rem;height:1.5rem;margin-top:-.75rem;background:var(--yel);border-radius:50%;box-shadow:.9rem 0 0 -.1rem var(--red)}
+.q input,.q textarea{margin-top:.9rem}
 /* hasil */
 #result{display:none}
-.score{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
-.big{font-family:'Pixelify Sans',sans-serif;font-weight:700;font-size:clamp(3rem,2rem + 6vw,6rem);line-height:1;background:var(--ink);color:var(--sun);padding:.3rem 1rem;box-shadow:5px 5px 0 var(--navy2);animation:pop .5s steps(5)}
-@keyframes pop{from{transform:scale(.3) rotate(-8deg)}to{transform:none}}
-.rv{border:2px solid var(--ink);background:var(--paper);padding:.8rem;margin:.8rem 0;border-left-width:12px}
-.rv.ok{border-left-color:var(--ok)}.rv.no{border-left-color:var(--bad)}.rv.man{border-left-color:var(--navy2)}
-.rv p{margin:.25rem 0}
-.tag{font-family:'Pixelify Sans',sans-serif;font-weight:700;padding:0 .5rem;color:#fff}
-.tag.ok{background:var(--ok)}.tag.no{background:var(--bad)}.tag.man{background:var(--navy2)}
-.key{background:#fff7b8;padding:.1rem .4rem;font-weight:bold}
-.ar.sm{font-size:clamp(1.5rem,1.2rem + 1.5vw,2.1rem);direction:rtl;line-height:2;text-align:center}
-.marq{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--sun);padding:.15rem 0;font-family:'Pixelify Sans',sans-serif}
-.marq span{display:inline-block;padding-left:100%;animation:mq 18s linear infinite}
-@keyframes mq{to{transform:translateX(-100%)}}
+.score{display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center}
+.big{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3.2rem,2rem + 6vw,6.2rem);line-height:1;color:#fff;background:var(--red);padding:.3rem 1.3rem;border:var(--line);border-radius:50% 0 50% 0;box-shadow:8px 8px 0 var(--ink);animation:pop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.2) rotate(-25deg)}to{transform:none}}
+.rv{border:var(--line);background:#fff;padding:.9rem 1rem;margin:.9rem 0;border-left-width:14px}
+.rv.ok{border-left-color:var(--grn)}.rv.no{border-left-color:var(--red)}.rv.man{border-left-color:var(--blue)}
+.rv p{margin:.3rem 0}
+.tag{font-family:'Syne',sans-serif;font-weight:700;padding:.05rem .7rem;color:#fff;border-radius:999px;font-size:.9em}
+.tag.ok{background:var(--grn)}.tag.no{background:var(--red)}.tag.man{background:var(--blue)}
+.key{background:var(--yel);padding:.05rem .5rem;font-weight:700}
+.ar.sm{font-size:clamp(1.5rem,1.2rem + 1.5vw,2.2rem);line-height:2.1}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media print{body{background:#fff}#hud,.btn,.marq{display:none}}
+@media print{body::before,body::after{display:none}#hud,.btn{display:none}.win{box-shadow:none}}
 </style>
 </head>
 <body>
@@ -86,9 +85,8 @@ textarea{min-height:7rem;resize:vertical}
 
 <!-- Layar mulai -->
 <section class="win" id="start">
-  <div class="bar"><span class="ttl">C:\PAI\KELAS3\BAB4.EXE</span><i>_</i><i>□</i><i>x</i></div>
-  <div class="marq"><span>★ SELAMAT DATANG ★ KERJAKAN DENGAN JUJUR ★ BISMILLAH ★ WAKTU 90 MENIT ★</span></div>
-  <div class="body">
+  <div class="bar"><span class="ttl">Pendidikan Agama Islam · Fase B Kelas 3</span><i>_</i><i>□</i><i>x</i></div>
+    <div class="body">
     <h1>Penilaian Akhir Bab 4</h1>
     <p>Pendidikan Agama Islam · Fase B · Kelas 3<br>Materi: Azan dan Iqomah</p>
     <ul>
@@ -121,7 +119,7 @@ textarea{min-height:7rem;resize:vertical}
 
 <!-- Hasil -->
 <section class="win" id="result">
-  <div class="bar"><span class="ttl">HASIL.TXT</span><i>_</i><i>□</i><i>x</i></div>
+  <div class="bar"><span class="ttl">Hasil penilaian</span><i>_</i><i>□</i><i>x</i></div>
   <div class="body">
     <h1 id="rname">Hasil</h1>
     <div class="score">
