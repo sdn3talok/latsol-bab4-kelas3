@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Penilaian Akhir Bab 4 – PAI Kelas 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Pixelify+Sans:wght@500;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{
+  --desk:#008080; --win:#c0c0c0; --paper:#fffdf2; --ink:#16161d; --navy:#000080; --navy2:#1084d0;
+  --ok:#0a7d2c; --bad:#c1121f; --sun:#ffd23f; --hi:#fff; --lo:#808080;
+  --bevel-out: inset -2px -2px 0 var(--lo), inset 2px 2px 0 var(--hi), 4px 4px 0 var(--ink);
+  --bevel-in: inset 2px 2px 0 var(--lo), inset -2px -2px 0 var(--hi);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--desk);
+  background-image:linear-gradient(rgba(0,0,0,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.08) 1px,transparent 1px);
+  background-size:24px 24px;color:var(--ink);font-family:'VT323',ui-monospace,monospace;font-size:clamp(1.25rem,1.1rem + .6vw,1.6rem);line-height:1.25}
+.wrap{width:min(920px,100% - 1.5rem);margin:0 auto;padding:1rem 0 5rem}
+.win{background:var(--win);box-shadow:var(--bevel-out);border:2px solid var(--ink);margin-bottom:1.4rem}
+.bar{display:flex;align-items:center;gap:.6rem;background:linear-gradient(90deg,var(--navy),var(--navy2));color:#fff;
+  font-family:'Pixelify Sans',sans-serif;font-weight:700;padding:.3rem .6rem;font-size:clamp(1rem,.9rem + .5vw,1.3rem)}
+.bar span.ttl{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar i{font-style:normal;background:var(--win);color:var(--ink);width:1.5rem;height:1.5rem;display:grid;place-items:center;box-shadow:var(--bevel-out);font-size:.9rem}
+.body{padding:clamp(.8rem,2.5vw,1.5rem)}
+h1{font-family:'Pixelify Sans',sans-serif;font-size:clamp(1.8rem,1.2rem + 3vw,3.2rem);line-height:1;margin:.2rem 0 .6rem;
+  text-shadow:3px 3px 0 var(--sun)}
+.btn{font:inherit;font-family:'Pixelify Sans',sans-serif;font-weight:700;background:var(--win);border:2px solid var(--ink);padding:.55rem 1.1rem;cursor:pointer;
+  box-shadow:var(--bevel-out);color:var(--ink);transition:transform .08s,box-shadow .08s}
+.btn:hover:not(:disabled){background:#d8d8d8}
+.btn:active:not(:disabled){transform:translate(3px,3px);box-shadow:var(--bevel-in)}
+.btn:disabled{color:var(--lo);cursor:not-allowed;text-shadow:1px 1px 0 var(--hi)}
+.btn.go{background:var(--sun)}
+:focus-visible{outline:3px dashed var(--bad);outline-offset:2px}
+input[type=text],textarea{width:100%;font:inherit;background:var(--paper);border:2px solid var(--ink);box-shadow:var(--bevel-in);padding:.5rem .7rem;color:var(--ink)}
+textarea{min-height:7rem;resize:vertical}
+/* timer */
+#hud{position:sticky;top:.5rem;z-index:20}
+#hud .body{display:flex;flex-wrap:wrap;gap:.7rem 1.2rem;align-items:center;padding:.6rem .9rem}
+#clock{font-family:'Pixelify Sans',sans-serif;font-weight:700;font-size:clamp(1.6rem,1.2rem + 2vw,2.4rem);background:#0b1a0b;color:#39ff6a;padding:.1rem .8rem;box-shadow:var(--bevel-in);letter-spacing:.08em;text-shadow:0 0 8px #39ff6a99}
+#clock.low{color:#ff4d4d;text-shadow:0 0 8px #ff4d4d99;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.45}}
+.prog{flex:1 1 180px;min-width:150px}
+.track{height:1.3rem;background:var(--paper);box-shadow:var(--bevel-in);padding:2px}
+#fill{height:100%;width:0;background:repeating-linear-gradient(90deg,var(--navy) 0 10px,transparent 10px 13px);transition:width .35s}
+/* soal */
+.q{background:var(--paper);border:2px solid var(--ink);box-shadow:4px 4px 0 var(--ink);padding:1rem;margin-bottom:1.1rem;transition:background .2s}
+.q.done{background:#f2ffe8}
+.qh{display:flex;gap:.7rem;align-items:flex-start}
+.no{flex:none;font-family:'Pixelify Sans',sans-serif;font-weight:700;background:var(--ink);color:var(--sun);min-width:2.4rem;height:2.4rem;display:grid;place-items:center;transform:rotate(-4deg)}
+.qt{margin:0;font-size:1.15em}
+.ar{font-family:'Amiri',serif;font-size:clamp(2rem,1.5rem + 2.5vw,3rem);direction:rtl;text-align:center;background:#fff;border:2px dashed var(--ink);margin:.7rem 0;padding:.3rem;line-height:1.7}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:.55rem;margin-top:.8rem}
+.opt{display:flex;gap:.6rem;align-items:center;text-align:left;font:inherit;background:var(--win);border:2px solid var(--ink);padding:.45rem .6rem;cursor:pointer;
+  box-shadow:var(--bevel-out);transition:transform .08s}
+.opt:hover{transform:translate(-1px,-1px);background:#dcdcdc}
+.opt b{flex:none;font-family:'Pixelify Sans',sans-serif;width:1.8rem;height:1.8rem;display:grid;place-items:center;background:var(--paper);border:2px solid var(--ink)}
+.opt[aria-checked=true]{background:var(--navy);color:#fff;box-shadow:var(--bevel-in);transform:translate(2px,2px)}
+.opt[aria-checked=true] b{background:var(--sun);color:var(--ink)}
+.sec{font-family:'Pixelify Sans',sans-serif;background:var(--ink);color:var(--paper);padding:.4rem .8rem;margin:1.8rem 0 .9rem;font-size:1.1em}
+.q input,.q textarea{margin-top:.7rem}
+/* hasil */
+#result{display:none}
+.score{display:flex;flex-wrap:wrap;gap:1rem;align-items:center}
+.big{font-family:'Pixelify Sans',sans-serif;font-weight:700;font-size:clamp(3rem,2rem + 6vw,6rem);line-height:1;background:var(--ink);color:var(--sun);padding:.3rem 1rem;box-shadow:5px 5px 0 var(--navy2);animation:pop .5s steps(5)}
+@keyframes pop{from{transform:scale(.3) rotate(-8deg)}to{transform:none}}
+.rv{border:2px solid var(--ink);background:var(--paper);padding:.8rem;margin:.8rem 0;border-left-width:12px}
+.rv.ok{border-left-color:var(--ok)}.rv.no{border-left-color:var(--bad)}.rv.man{border-left-color:var(--navy2)}
+.rv p{margin:.25rem 0}
+.tag{font-family:'Pixelify Sans',sans-serif;font-weight:700;padding:0 .5rem;color:#fff}
+.tag.ok{background:var(--ok)}.tag.no{background:var(--bad)}.tag.man{background:var(--navy2)}
+.key{background:#fff7b8;padding:.1rem .4rem;font-weight:bold}
+.ar.sm{font-size:clamp(1.5rem,1.2rem + 1.5vw,2.1rem);direction:rtl;line-height:2;text-align:center}
+.marq{overflow:hidden;white-space:nowrap;background:var(--ink);color:var(--sun);padding:.15rem 0;font-family:'Pixelify Sans',sans-serif}
+.marq span{display:inline-block;padding-left:100%;animation:mq 18s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{body{background:#fff}#hud,.btn,.marq{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Layar mulai -->
+<section class="win" id="start">
+  <div class="bar"><span class="ttl">C:\PAI\KELAS3\BAB4.EXE</span><i>_</i><i>□</i><i>x</i></div>
+  <div class="marq"><span>★ SELAMAT DATANG ★ KERJAKAN DENGAN JUJUR ★ BISMILLAH ★ WAKTU 90 MENIT ★</span></div>
+  <div class="body">
+    <h1>Penilaian Akhir Bab 4</h1>
+    <p>Pendidikan Agama Islam · Fase B · Kelas 3<br>Materi: Azan dan Iqomah</p>
+    <ul>
+      <li>Ada 17 soal: 10 pilihan ganda, 5 isian, 2 uraian.</li>
+      <li>Waktu mengerjakan 90 menit, dihitung mundur.</li>
+      <li>Tombol <b>Selesai</b> aktif setelah semua soal terjawab.</li>
+      <li>Skor dan kunci jawaban muncul setelah selesai.</li>
+    </ul>
+    <label for="nama">Tulis namamu:</label>
+    <input type="text" id="nama" maxlength="40" placeholder="Nama lengkap" autocomplete="name">
+    <p style="margin-top:1rem"><button class="btn go" id="mulai">Mulai mengerjakan</button></p>
+  </div>
+</section>
+
+<!-- Ujian -->
+<div id="exam" hidden>
+  <div class="win" id="hud">
+    <div class="bar"><span class="ttl" id="who">Peserta</span><i>x</i></div>
+    <div class="body">
+      <div id="clock" role="timer" aria-live="off">90:00</div>
+      <div class="prog">
+        <div id="cnt">Terjawab 0 dari 17</div>
+        <div class="track"><div id="fill"></div></div>
+      </div>
+      <button class="btn go" id="selesai" disabled>Selesai</button>
+    </div>
+  </div>
+  <div id="qs"></div>
+</div>
+
+<!-- Hasil -->
+<section class="win" id="result">
+  <div class="bar"><span class="ttl">HASIL.TXT</span><i>_</i><i>□</i><i>x</i></div>
+  <div class="body">
+    <h1 id="rname">Hasil</h1>
+    <div class="score">
+      <div class="big" id="rscore">0</div>
+      <div id="rinfo"></div>
+    </div>
+    <div class="sec">Kunci jawaban dan pembahasan</div>
+    <div id="review"></div>
+    <p><button class="btn" onclick="window.print()">Cetak hasil</button> <button class="btn go" onclick="location.reload()">Ulangi</button></p>
+  </div>
+</section>
+</div>
+
+<script>
+const L=['A','B','C','D'];
+const ADZAN=['اللهُ أَكْبَرُ اللهُ أَكْبَرُ','اللهُ أَكْبَرُ اللهُ أَكْبَرُ','أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللهُ (2x)','أَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ (2x)','حَيَّ عَلَى الصَّلَاةِ (2x)','حَيَّ عَلَى الْفَلَاحِ (2x)','اللهُ أَكْبَرُ اللهُ أَكْبَرُ','لَا إِلٰهَ إِلَّا اللهُ'];
+const IQOMAH=['اللهُ أَكْبَرُ اللهُ أَكْبَرُ','أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللهُ','أَشْهَدُ أَنَّ مُحَمَّدًا رَسُولُ اللهِ','حَيَّ عَلَى الصَّلَاةِ','حَيَّ عَلَى الْفَلَاحِ','قَدْ قَامَتِ الصَّلَاةُ قَدْ قَامَتِ الصَّلَاةُ','اللهُ أَكْبَرُ اللهُ أَكْبَرُ','لَا إِلٰهَ إِلَّا اللهُ'];
+
+// type: pg = pilihan ganda, is = isian, ur = uraian (tidak dinilai otomatis)
+const Q=[
+{t:'pg',q:'Orang yang mengumandangkan azan disebut ....',o:['imam','makmum','muazin','bilal'],a:2},
+{t:'pg',q:'Mengumandangkan azan sunah menghadap ....',o:['kanan','barat','kiblat','utara'],a:2},
+{t:'pg',ar:'حَيَّ عَلَى الصَّلَاةِ',q:'Lafal azan tersebut artinya ....',o:['marilah kita mendirikan shalat','marilah kita menuju kemenangan','shalat itu lebih baik daripada tidur','tidak ada tuhan selain Allah'],a:0},
+{t:'pg',q:'Dalam iqomah, bacaan syahadat dibaca sebanyak ... kali.',o:['satu','dua','tiga','empat'],a:0,n:'Dalam iqomah setiap kalimat syahadat dibaca satu kali (dalam azan dua kali).'},
+{t:'pg',q:'Hukum melaksanakan azan sebelum shalat berjamaah adalah ....',o:['wajib','makruh','sunah','mubah'],a:2},
+{t:'pg',q:'Perhatikan pernyataan di bawah ini!<br>1) diluar waktu shalat;<br>2) Niat azan;<br>3) Disuarakan dalam hati dan khusuk;<br>4) Diucapkan berurutan serta bersambung.<br>Yang termasuk ketentuan adzan adalah nomor ....',o:['1 dan 2','2 dan 3','1 dan 3','2 dan 4'],a:3,n:'Azan dilakukan di dalam waktu shalat dan dengan suara keras, jadi pernyataan 1 dan 3 salah.'},
+{t:'pg',ar:'حَيَّ عَلَى الْفَلَاحِ',q:'Lafal adzan di atas artinya adalah ....',o:['marilah kita mendirikan shalat','marilah kita menuju kemenangan','shalat itu lebih baik daripada tidur','tidak ada tuhan selain Allah'],a:1},
+{t:'pg',ar:'اَلصَّلَاةُ خَيْرٌ مِنَ النَّوْمِ',q:'Lafadz adzan di atas hanya dikumandangkan pada waktu shalat ....',o:['magrib','isya\'','subuh','duhur'],a:2},
+{t:'pg',ar:'قَدْ قَامَتِ الصَّلَاةُ',q:'Lafadz iqomah di atas artinya adalah ....',o:['marilah kita mendirikan shalat','marilah kita menuju kemenangan','Sesungguhnya shalat itu lebih baik daripada tidur','Sesungguhnya sudah hampir mengerjakan sholat.'],a:3},
+{t:'pg',q:'Seruan bahwa shalat berjamaah akan segera didirikan adalah setelah dikumandangkan ....',o:['adzan','al Qur\'an','iqamah','dzikir'],a:2,n:'Seruan bahwa shalat berjamaah akan segera didirikan adalah iqamah.'},
+{t:'is',q:'Seruan masuk waktu shalat disebut ....',k:['azan','adzan'],show:'azan (adzan)'},
+{t:'is',q:'Iqomah dibaca sebagai tanda akan dimulainya ....',k:['shalat','sholat','salat'],show:'shalat (berjamaah)'},
+{t:'is',q:'Hukum melaksanakan azan sebelum shalat berjamaah adalah ....',k:['sunah','sunnah','sunat'],show:'sunah'},
+{t:'is',q:'Ketika azan dikumandangkan, ...... untuk menjawab dan berdoa setelahnya.',k:['dianjurkan','disunahkan','disunnahkan','sunah','sunnah','dianjurkan kita'],show:'kita dianjurkan (disunahkan)'},
+{t:'is',q:'Muadzin adalah orang yang mengumandangkan adzan harus dengan suara yang .....',k:['keras','lantang','nyaring','merdu','indah','lantang'],show:'keras / lantang / merdu'},
+{t:'ur',q:'Tulis lafadz adzan lengkap dengan tulisan arab!',key:ADZAN},
+{t:'ur',q:'Tulis lafal Iqomah lengkap dengan tulisan arab!',key:IQOMAH}
+];
+
+const ans=new Array(Q.length).fill('');
+const $=s=>document.querySelector(s);
+let end=0,tick=null,finished=false;
+
+function build(){
+  const box=$('#qs');let html='';
+  const secs={0:'A. Berilah tanda silang (X) pada jawaban yang paling tepat!',10:'B. Isilah titik-titik di bawah ini dengan tepat!',15:'C. Jawablah pertanyaan-pertanyaan berikut dengan benar!'};
+  Q.forEach((x,i)=>{
+    if(secs[i])html+=`<div class="sec">${secs[i]}</div>`;
+    html+=`<div class="q" id="q${i}"><div class="qh"><div class="no">${i+1}</div><p class="qt">${x.q}</p></div>`;
+    if(x.ar)html+=`<div class="ar" lang="ar">${x.ar}</div>`;
+    if(x.t==='pg'){
+      html+=`<div class="opts" role="radiogroup">`+x.o.map((o,j)=>`<button class="opt" role="radio" aria-checked="false" data-i="${i}" data-j="${j}"><b>${L[j]}</b><span>${o}</span></button>`).join('')+`</div>`;
+    }else if(x.t==='is'){
+      html+=`<input type="text" data-i="${i}" placeholder="Tulis jawabanmu" aria-label="Jawaban ${i+1}">`;
+    }else{
+      html+=`<textarea data-i="${i}" placeholder="Tulis di sini (boleh tulisan Arab atau latin)" aria-label="Jawaban ${i+1}"></textarea>`;
+    }
+    if(x.ar&&x.t==='pg'){/* sudah ditambahkan */}
+    html+=`</div>`;
+  });
+  box.innerHTML=html;
+}
+
+function update(){
+  const n=ans.filter(a=>String(a).trim()!=='').length;
+  $('#cnt').textContent=`Terjawab ${n} dari ${Q.length}`;
+  $('#fill').style.width=(n/Q.length*100)+'%';
+  $('#selesai').disabled=n<Q.length;
+  Q.forEach((_,i)=>$('#q'+i).classList.toggle('done',String(ans[i]).trim()!==''));
+}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('.opt');if(!b||finished)return;
+  const i=+b.dataset.i,j=+b.dataset.j;ans[i]=j;
+  b.parentElement.querySelectorAll('.opt').forEach(o=>o.setAttribute('aria-checked',o===b));
+  update();
+});
+document.addEventListener('input',e=>{
+  const t=e.target;if(!t.dataset.i||finished)return;
+  ans[+t.dataset.i]=t.value;update();
+});
+
+function fmt(s){const m=Math.floor(s/60),d=s%60;return String(m).padStart(2,'0')+':'+String(d).padStart(2,'0')}
+function run(){
+  const left=Math.max(0,Math.round((end-Date.now())/1000));
+  const c=$('#clock');c.textContent=fmt(left);c.classList.toggle('low',left<=300);
+  if(left<=0)finish(true);
+}
+
+$('#mulai').onclick=()=>{
+  const nm=$('#nama').value.trim();
+  if(!nm){$('#nama').focus();$('#nama').placeholder='Nama wajib diisi dulu ya';return}
+  $('#who').textContent='Peserta: '+nm;$('#rname').textContent='Hasil '+nm;
+  $('#start').hidden=true;$('#exam').hidden=false;
+  build();update();
+  end=Date.now()+90*60*1000;run();tick=setInterval(run,500);
+  window.scrollTo({top:0});
+};
+$('#selesai').onclick=()=>{
+  if(confirm('Yakin sudah selesai? Jawaban tidak bisa diubah lagi.'))finish(false);
+};
+
+const norm=s=>String(s).toLowerCase().replace(/[^a-z\s]/g,'').trim();
+function finish(timeUp){
+  if(finished)return;finished=true;clearInterval(tick);
+  let ok=0,auto=0,rv='';
+  Q.forEach((x,i)=>{
+    const a=ans[i];let cls='man',tag='Periksa sendiri',body='';
+    if(x.t==='pg'){
+      auto++;const right=a===x.a;if(right)ok++;
+      cls=right?'ok':'no';tag=right?'Benar':'Salah';
+      body=`<p>Jawabanmu: ${a===''?'(kosong)':L[a]+'. '+x.o[a]}</p><p>Kunci: <span class="key">${L[x.a]}. ${x.o[x.a]}</span></p>`+(x.n?`<p>${x.n}</p>`:'');
+    }else if(x.t==='is'){
+      auto++;const right=x.k.some(k=>norm(a).split(/\s+/).includes(k)||norm(a)===k);if(right)ok++;
+      cls=right?'ok':'no';tag=right?'Benar':'Salah';
+      body=`<p>Jawabanmu: ${String(a).trim()===''?'(kosong)':esc(a)}</p><p>Kunci: <span class="key">${x.show}</span></p>`;
+    }else{
+      body=`<p>Jawabanmu: ${String(a).trim()===''?'(kosong)':esc(a)}</p><p>Kunci:</p><div class="ar sm" lang="ar">${x.key.join('<br>')}</div>`;
+    }
+    rv+=`<div class="rv ${cls}"><p><span class="tag ${cls}">${tag}</span> <b>No. ${i+1}</b> ${x.q.replace(/<br>/g,' ')}</p>${x.ar?`<div class="ar sm" lang="ar">${x.ar}</div>`:''}${body}</div>`;
+  });
+  const sc=Math.round(ok/auto*100);
+  $('#rscore').textContent=sc;
+  $('#rinfo').innerHTML=`Benar ${ok} dari ${auto} soal (nomor 1 sampai 15).<br>Soal uraian nomor 16 dan 17 dinilai oleh guru.`+(timeUp?'<br><b>Waktu habis, jawaban dikumpulkan otomatis.</b>':'')+'<br>'+(sc>=80?'Hebat, pertahankan!':sc>=60?'Bagus, tingkatkan lagi!':'Ayo belajar lagi, kamu pasti bisa!');
+  $('#review').innerHTML=rv;
+  $('#exam').hidden=true;$('#result').style.display='block';
+  window.scrollTo({top:0});
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+</script>
+</body>
+</html>
